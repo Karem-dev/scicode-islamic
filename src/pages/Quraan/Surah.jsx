@@ -179,7 +179,7 @@ function Surah() {
                       <div className="text-sm text-gray-500 dark:text-gray-400">
                         Verse {verse.numberInSurah} of {surah.numberOfAyahs}
                       </div>
-                    {/* </div>
+                    </div>
                     <div className="flex items-center space-x-3">
                       <button className="p-2 text-gray-500 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors">
                         <FaBookmark />
@@ -187,37 +187,29 @@ function Surah() {
                       <button className="p-2 text-gray-500 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors">
                         <FaShare />
                       </button>
-                    </div> */}
+                    </div>
                   </div>
 
                   {/* Arabic Text */}
                   <div className="mb-6">
-               <div className="mb-6 text-center">
-  <p
-    className="leading-loose text-gray-800 dark:text-gray-200"
-    style={{
-      fontFamily: "'Scheherazade', serif", // يمكنك تغييره إلى خط قرآني أفضل عند توفره
-      fontSize: "2.4em",
-      direction: "rtl",
-      lineHeight: "2.8",
-      textAlign: "center",
-      letterSpacing: "0.03em",
-      wordSpacing: "0.1em",
-    }}
-  >
-    {verse.text}
-    {verse.sajda ? <span> </span>:null}
-    <span
-    className="mx-5"
-     
-    >
-      ﴿
-      {verse.numberInSurah}﴾
-      
-    </span>
-  </p>
-</div>
-
+                    <div className="mb-6 text-center">
+                      <p
+                        className="leading-loose text-gray-800 dark:text-gray-200"
+                        style={{
+                          fontFamily: "'Scheherazade', serif",
+                          fontSize: "2.4em",
+                          direction: "rtl",
+                          lineHeight: "2.8",
+                          textAlign: "center",
+                          letterSpacing: "0.03em",
+                          wordSpacing: "0.1em",
+                        }}
+                      >
+                        {verse.text}
+                        {verse.sajda ? <span> </span> : null}
+                        <span className="mx-5">﴿{verse.numberInSurah}﴾</span>
+                      </p>
+                    </div>
                   </div>
 
                   {/* Decorative Line */}
