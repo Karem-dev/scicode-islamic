@@ -26,7 +26,7 @@ function PrayerTimes() {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://api.aladhan.com/v1/timingsByCity?city=${location.city}&country=${location.country}&method=4`
+          `https://api.aladhan.com/v1/timingsByCity?city=${location.city}&country=${location.country}&method=4`
         );
         setPrayerTimes(response.data.data);
         setLoading(false);
