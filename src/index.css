@@ -1,0 +1,20 @@
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Add smooth transition for dark mode */
+/* * {
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+} */
+
+/* Ensure dark mode is applied to the entire document */
+/* :root {
+  color-scheme: light dark;
+}
+
+.dark {
+  color-scheme: dark;
+} */
+
+.active{
+  color: rgb(101, 237, 101);
+}
