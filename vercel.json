@@ -9,5 +9,5 @@
   "outputDirectory": "dist",
   "framework": "vite",
   "installCommand": "npm install",
-  "nodeVersion": "18.x"
+  "nodeVersion": "18.17.0"
 } 
