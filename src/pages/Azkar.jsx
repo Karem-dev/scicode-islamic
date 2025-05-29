@@ -209,7 +209,10 @@ function Azkar() {
         <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 hover:shadow-xl transition-all duration-300">
           <div className="flex justify-between items-start mb-4">
             <div className="flex-1">
-              <p className="text-2xl font-arabic text-right mb-4 leading-loose dark:text-white">
+              <p
+                onClick={() => incrementCounter(currentIndex)}
+                className="text-2xl font-arabic text-right mb-4 leading-loose dark:text-white cursor-pointer hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+              >
                 {currentZekr.zekr}
               </p>
               {currentZekr.bless && (
@@ -218,16 +221,6 @@ function Azkar() {
                 </p>
               )}
             </div>
-            <button
-              onClick={() => handlePlayAudio(currentZekr)}
-              className="text-gray-400 hover:text-emerald-500 dark:hover:text-emerald-400"
-            >
-              {isPlaying ? (
-                <FaVolumeMute className="w-5 h-5" />
-              ) : (
-                <FaVolumeUp className="w-5 h-5" />
-              )}
-            </button>
           </div>
           <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
             <div className="flex items-center space-x-4">

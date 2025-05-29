@@ -15,7 +15,10 @@ function Navbar() {
           {/* Logo and Brand */}
           <div className="flex items-center">
             <FaQuran className="text-emerald-600 dark:text-emerald-400 text-2xl mr-2" />
-            <Link to={"/"} className="text-xl font-bold text-emerald-800 dark:text-emerald-300">
+            <Link
+              to={"/"}
+              className="text-xl font-bold text-emerald-800 dark:text-emerald-300"
+            >
               Sci-Code Islamic
             </Link>
           </div>
@@ -65,8 +68,6 @@ function Navbar() {
                 <FaMoon className="h-5 w-5 text-gray-600" />
               )}
             </button>
-
-           
           </div>
 
           {/* Mobile Menu Button */}
@@ -131,7 +132,6 @@ function Navbar() {
               >
                 Azkar
               </NavLink>
-             
             </div>
           </div>
         )}

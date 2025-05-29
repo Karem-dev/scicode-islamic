@@ -179,7 +179,7 @@ function Surah() {
                       <div className="text-sm text-gray-500 dark:text-gray-400">
                         Verse {verse.numberInSurah} of {surah.numberOfAyahs}
                       </div>
-                    </div>
+                    {/* </div>
                     <div className="flex items-center space-x-3">
                       <button className="p-2 text-gray-500 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors">
                         <FaBookmark />
@@ -187,7 +187,7 @@ function Surah() {
                       <button className="p-2 text-gray-500 hover:text-emerald-600 dark:text-gray-400 dark:hover:text-emerald-400 transition-colors">
                         <FaShare />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
 
                   {/* Arabic Text */}
