@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import PrayerReminderModal from "../components/PrayerReminderModal";
 
 function PrayerTimes() {
   const [prayerTimes, setPrayerTimes] = useState(null);
@@ -20,6 +21,7 @@ function PrayerTimes() {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [showSearch, setShowSearch] = useState(false);
+  const [showReminder, setShowReminder] = useState(false);
 
   useEffect(() => {
     const fetchPrayerTimes = async () => {
@@ -39,10 +41,22 @@ function PrayerTimes() {
     fetchPrayerTimes();
   }, [location]);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowReminder(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleLocationChange = (e) => {
     const [city, country] = e.target.value.split(", ");
     setLocation({ city, country });
     setShowSearch(false);
+  };
+
+  const handleCloseReminder = () => {
+    setShowReminder(false);
   };
 
   const prayerIcons = {
@@ -190,7 +204,11 @@ function PrayerTimes() {
             ))}
           </div>
 
-      </div>
+          <PrayerReminderModal
+            isOpen={showReminder}
+            onClose={handleCloseReminder}
+          />
+        </div>
       </div>
     </>
   );

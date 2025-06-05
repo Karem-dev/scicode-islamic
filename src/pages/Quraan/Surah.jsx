@@ -111,18 +111,15 @@ function Surah() {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 pb-10">
+      <div
+        className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20 pb-10"
+        dir="rtl"
+      >
         <div className="container mx-auto px-4">
           {/* Surah Header */}
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-8">
-            <div className="flex items-center mb-4">
-              <button
-                onClick={() => navigate(-1)}
-                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 mr-4"
-              >
-                <FaArrowLeft className="text-emerald-600 dark:text-emerald-400" />
-              </button>
-              <div>
+            <div className="flex items-center justify-between mb-4">
+              <div className="text-right">
                 <h1 className="text-3xl font-bold text-emerald-800 dark:text-emerald-300">
                   {surah.name}
                 </h1>
@@ -130,11 +127,17 @@ function Surah() {
                   {surah.englishName}
                 </p>
               </div>
+              <button
+                onClick={() => navigate(-1)}
+                className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <FaArrowLeft className="text-emerald-600 dark:text-emerald-400" />
+              </button>
             </div>
-            <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
+            <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400 justify-end">
               <span>{surah.englishNameTranslation}</span>
               <span>•</span>
-              <span>{surah.numberOfAyahs} Verses</span>
+              <span>{surah.numberOfAyahs} آية</span>
               <span>•</span>
               <span>{surah.revelationType}</span>
             </div>
@@ -145,44 +148,31 @@ function Surah() {
             <div className="relative">
               <input
                 type="text"
-                placeholder="Search verses..."
+                placeholder="ابحث في الآيات..."
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
-                  setCurrentPage(1); // Reset to first page on search
+                  setCurrentPage(1);
                 }}
-                className="w-full px-4 py-3 pl-12 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-4 py-3 pr-12 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-right"
               />
-              <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <FaSearch className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
             </div>
             {searchQuery && (
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
-                Found {filteredVerses.length} verses matching "{searchQuery}"
+              <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 text-right">
+                تم العثور على {filteredVerses.length} آية تطابق "{searchQuery}"
               </p>
             )}
           </div>
 
           {/* Verses List */}
-          <div className="max-w-8xl mx-auto space-y-8">
+          <div                 className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700"
+          >
             {currentVerses.map((verse) => (
               <div
                 key={verse.numberInSurah}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 dark:border-gray-700"
               >
                 <div className="p-8">
-                  {/* Verse Number and Controls */}
-                  <div className="flex justify-between items-center mb-6">
-                    <div className="flex items-center space-x-4">
-                      <div className="w-12 h-12 rounded-full bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-medium text-lg">
-                        {verse.numberInSurah}
-                      </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400">
-                        Verse {verse.numberInSurah} of {surah.numberOfAyahs}
-                      </div>
-                    </div>
-           
-                  </div>
-
                   {/* Arabic Text */}
                   <div className="mb-6">
                     <div className="mb-6 text-center">
@@ -193,14 +183,14 @@ function Surah() {
                           fontSize: "2.4em",
                           direction: "rtl",
                           lineHeight: "2.8",
-                          textAlign: "center",
+                          textAlign: "start",
                           letterSpacing: "0.03em",
                           wordSpacing: "0.1em",
                         }}
                       >
                         {verse.text}
                         {verse.sajda ? <span> </span> : null}
-                        <span className="mx-5">﴿{verse.numberInSurah}﴾</span>
+                        <span className="mx-5 text-yellow-500">﴿{verse.numberInSurah}﴾</span>
                       </p>
                     </div>
                   </div>
@@ -224,12 +214,12 @@ function Surah() {
           {/* Pagination */}
           {!loading && !error && filteredVerses.length > 0 && (
             <div className="flex justify-center mt-10">
-              <nav className="flex items-center space-x-2">
+              <nav className="flex items-center space-x-2 space-x-reverse">
                 <button
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                  disabled={currentPage === totalPages}
                   className={`px-3 py-2 rounded-md ${
-                    currentPage === 1
+                    currentPage === totalPages
                       ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed"
                       : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
                   }`}
@@ -252,10 +242,10 @@ function Surah() {
                 ))}
 
                 <button
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                  disabled={currentPage === 1}
                   className={`px-3 py-2 rounded-md ${
-                    currentPage === totalPages
+                    currentPage === 1
                       ? "bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed"
                       : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
                   }`}

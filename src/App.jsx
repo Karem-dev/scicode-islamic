@@ -6,6 +6,7 @@ import Surah from "./pages/Quraan/Surah";
 import PrayerTimes from "./pages/PrayerTimes";
 import FindMosque from "./pages/FindMosque";
 import Azkar from "./pages/Azkar";
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route path="/find-mosque" element={<FindMosque />} />
       <Route path="/azkar" element={<Azkar />} />
       <Route path="/azkar/:category" element={<Azkar />} />
+      <Route path="*" element={<NotFound/>}/>
     </Routes>
   );
 }

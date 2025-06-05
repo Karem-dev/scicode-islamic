@@ -11,6 +11,8 @@ import {
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import PrayerReminderModal from "../components/PrayerReminderModal";
+import Modal from "../components/Modal";
 
 function Azkar() {
   const [azkarData, setAzkarData] = useState({
@@ -27,6 +29,9 @@ function Azkar() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
   const { category } = useParams();
+  const [showReminder, setShowReminder] = useState(false);
+  const [isEnglish, setIsEnglish] = useState(true);
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
 
   useEffect(() => {
     const fetchAzkar = async () => {
@@ -58,6 +63,27 @@ function Azkar() {
 
     fetchAzkar();
   }, []);
+
+  useEffect(() => {
+    // Show initial reminder modal
+    const timer = setTimeout(() => {
+      setShowReminder(true);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleCloseReminder = () => {
+    setShowReminder(false);
+  };
+
+  const handleCloseCompletionModal = () => {
+    setShowCompletionModal(false);
+  };
+
+  const toggleLanguage = () => {
+    setIsEnglish(!isEnglish);
+  };
 
   const tabConfig = [
     {
@@ -117,6 +143,11 @@ function Azkar() {
       setCompletedAzkar((prev) => [...prev, index]);
       if (index === currentIndex) {
         setCurrentIndex((prev) => prev + 1);
+        
+        // Check if all azkar are completed
+        if (currentIndex + 1 >= currentCategory.data.length) {
+          setShowCompletionModal(true);
+        }
       }
     }
   };
@@ -177,6 +208,7 @@ function Azkar() {
               setCurrentIndex(0);
               setCounters({});
               setCompletedAzkar([]);
+              setShowCompletionModal(true);
             }}
             className="px-6 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
           >
@@ -307,12 +339,113 @@ function Azkar() {
             <p className="text-gray-600 dark:text-gray-300">
               Remembrance of Allah for every occasion
             </p>
+            <button
+              onClick={toggleLanguage}
+              className="mt-4 px-4 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700 transition-colors"
+            >
+              {isEnglish ? "عربي" : "English"}
+            </button>
           </div>
 
           {/* Content */}
           <div className="max-w-4xl mx-auto">
-            {category ? renderDetailedView() : renderCategoryList()}
+            {category && (
+              <button
+                onClick={() => navigate("/azkar")}
+                className="flex items-center text-gray-600 dark:text-gray-300 mb-6 hover:text-emerald-600 dark:hover:text-emerald-400"
+              >
+                <FaArrowLeft className="mr-2" />
+                Back to Categories
+              </button>
+            )}
+
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="text-gray-600 dark:text-gray-300">
+                  Loading Azkar...
+                </div>
+              </div>
+            ) : error ? (
+              <div className="text-center py-12">
+                <div className="text-red-600 dark:text-red-400">{error}</div>
+              </div>
+            ) : (
+              <div>
+                {category ? renderDetailedView() : renderCategoryList()}
+              </div>
+            )}
           </div>
+
+          {/* Initial Reminder Modal */}
+          <PrayerReminderModal
+            isOpen={showReminder}
+            onClose={handleCloseReminder}
+          />
+
+          {/* Completion Modal */}
+          <Modal
+            isOpen={showCompletionModal}
+            onClose={handleCloseCompletionModal}
+            title={
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">
+                  مبروك! 🎉
+                </h2>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Congratulations!
+                </p>
+              </div>
+            }
+          >
+            <div className="text-center space-y-6">
+              <div className="bg-emerald-50 dark:bg-emerald-900/30 p-4 rounded-lg">
+                <p className="text-lg font-medium text-emerald-800 dark:text-emerald-300">
+                  Thank you for completing the Azkar!
+                </p>
+                <p className="text-sm text-emerald-600 dark:text-emerald-400 mt-2">
+                  May Allah accept your good deeds
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                  Don't forget to pray for:
+                </h3>
+                <ul className="space-y-3">
+                  <li className="flex items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900 rounded-full flex items-center justify-center mr-4">
+                      <span className="text-emerald-600 dark:text-emerald-400 text-xl">•</span>
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-medium text-gray-800 dark:text-gray-200">The website owner</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">May Allah bless their efforts</p>
+                    </div>
+                  </li>
+                  <li className="flex items-center bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                    <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900 rounded-full flex items-center justify-center mr-4">
+                      <span className="text-emerald-600 dark:text-emerald-400 text-xl">•</span>
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-medium text-gray-800 dark:text-gray-200">Our brothers and sisters in Gaza</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">May Allah protect and strengthen them</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
+                <p className="text-sm text-gray-500 dark:text-gray-400 italic mb-4">
+                  "The supplication of a Muslim for his brother in his absence is answered. At his head is an angel, and every time he makes a supplication for good for him, the angel who is assigned to him says: 'Ameen, and may you have the same.'"
+                </p>
+                <button
+                  onClick={handleCloseCompletionModal}
+                  className="px-8 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors font-medium shadow-sm hover:shadow-md"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </Modal>
         </div>
       </div>
     </>
