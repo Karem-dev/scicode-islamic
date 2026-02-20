@@ -5,6 +5,7 @@
 @layer base {
   :root {
     --primary-emerald: 16, 185, 129;
+    --primary-teal: 20, 184, 166;
     color-scheme: light dark;
   }
 
@@ -20,17 +21,46 @@
   }
 }
 
+@layer components {
+  .btn-premium {
+    @apply relative px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition-all duration-300 shadow-[0_10px_30px_-10px_rgba(16, 185, 129, 0.4)] active:scale-95 overflow-hidden;
+  }
+
+  .btn-premium::after {
+    @apply content-[''] absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] transition-transform duration-500;
+  }
+
+  .btn-premium:hover::after {
+    @apply translate-x-[100%];
+  }
+
+  .card-premium {
+    @apply bg-white/80 dark:bg-white/5 backdrop-blur-xl border border-slate-200/50 dark:border-white/10 rounded-[2.5rem] p-8 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-500/30;
+  }
+}
+
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
 
   .glass {
-    @apply bg-white/80 dark:bg-black/20 backdrop-blur-xl border border-white/20 dark:border-white/5;
+    @apply bg-white/70 dark:bg-black/30 backdrop-blur-2xl border border-white/30 dark:border-white/5;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent;
+  }
+
+  .mesh-gradient {
+    background-image:
+      radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(20, 184, 166, 0.05) 0px, transparent 50%);
   }
 }
 
@@ -38,6 +68,20 @@
   font-family: 'Amiri', serif;
 }
 
-.active {
-  color: rgb(16, 185, 129);
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
