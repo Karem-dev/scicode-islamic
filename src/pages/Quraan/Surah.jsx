@@ -11,7 +11,6 @@ import {
   FaFlag,
   FaCheckCircle,
   FaHistory,
-  FaFolder,
 } from "react-icons/fa";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
