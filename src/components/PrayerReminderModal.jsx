@@ -12,6 +12,7 @@ const PrayerReminderModal = ({ isOpen, onClose }) => {
           background: linear-gradient(165deg, #0d1a12 0%, #07120c 100%);
           color: white;
           width: 100%;
+<<<<<<< HEAD
           position: relative;
           overflow: hidden;
         }
@@ -25,6 +26,23 @@ const PrayerReminderModal = ({ isOpen, onClose }) => {
           height: 200%;
           background: radial-gradient(circle at center, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
           pointer-events: none;
+=======
+          max-width: min(560px, 94vw);
+          /* الطول يتحكم فيه الـ viewport مباشرة */
+          height: auto;
+          max-height: 90vh;
+          /* flex layout عشان الـ body يأخد الـ scroll لوحده */
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          box-shadow:
+            0 0 0 1px rgba(180,145,60,0.1),
+            0 24px 80px rgba(0,0,0,0.7),
+            inset 0 1px 0 rgba(255,255,255,0.05);
+          opacity: ${visible ? 1 : 0};
+          transform: ${visible ? "translateY(0) scale(1)" : "translateY(20px) scale(0.97)"};
+          transition: opacity 0.4s ease, transform 0.4s ease;
+>>>>>>> ee8ffbbb794925aaeacee18a4fbcf04c3b291879
         }
 
         .prayer-modal-header {
@@ -301,4 +319,6 @@ const PrayerReminderModal = ({ isOpen, onClose }) => {
   );
 };
 
+<<<<<<< HEAD
 export default PrayerReminderModal;
+
