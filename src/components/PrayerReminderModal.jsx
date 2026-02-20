@@ -302,4 +302,3 @@ const PrayerReminderModal = ({ isOpen, onClose }) => {
 };
 
 export default PrayerReminderModal;
-
