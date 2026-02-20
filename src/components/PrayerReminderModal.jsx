@@ -37,8 +37,13 @@ const PrayerReminderModal = ({ isOpen, onClose }) => {
           border-radius: clamp(12px, 2.5vw, 20px);
           width: 100%;
           max-width: min(560px, 94vw);
-          max-height: min(88vh, 680px);
-          overflow-y: auto;
+          /* الطول يتحكم فيه الـ viewport مباشرة */
+          height: auto;
+          max-height: 90vh;
+          /* flex layout عشان الـ body يأخد الـ scroll لوحده */
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
           box-shadow:
             0 0 0 1px rgba(180,145,60,0.1),
             0 24px 80px rgba(0,0,0,0.7),
@@ -46,19 +51,6 @@ const PrayerReminderModal = ({ isOpen, onClose }) => {
           opacity: ${visible ? 1 : 0};
           transform: ${visible ? "translateY(0) scale(1)" : "translateY(20px) scale(0.97)"};
           transition: opacity 0.4s ease, transform 0.4s ease;
-          scrollbar-width: thin;
-          scrollbar-color: rgba(180,145,60,0.3) transparent;
-        }
-
-        .prayer-modal-card::-webkit-scrollbar {
-          width: 4px;
-        }
-        .prayer-modal-card::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .prayer-modal-card::-webkit-scrollbar-thumb {
-          background: rgba(180,145,60,0.3);
-          border-radius: 2px;
         }
 
         .prayer-modal-header {
@@ -316,4 +308,4 @@ const PrayerReminderModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default PrayerReminderModal;`2
+export default PrayerReminderModal;
