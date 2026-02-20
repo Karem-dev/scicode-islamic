@@ -1,319 +1,305 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Modal from "./Modal";
+import { motion } from "framer-motion";
 
 const PrayerReminderModal = ({ isOpen, onClose }) => {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      const timer = setTimeout(() => setVisible(true), 50);
-      return () => clearTimeout(timer);
-    } else {
-      setVisible(false);
-    }
-  }, [isOpen]);
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
 
-        .prayer-modal-overlay {
-          position: fixed;
-          inset: 0;
-          background: rgba(10, 20, 15, 0.78);
-          backdrop-filter: blur(6px);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          z-index: 9999;
-          padding: clamp(12px, 4vw, 32px);
-          box-sizing: border-box;
-        }
-
         .prayer-modal-card {
-          background: linear-gradient(160deg, #0f2318 0%, #0a1a10 60%, #071410 100%);
-          border: 1px solid rgba(180, 145, 60, 0.35);
-          border-radius: clamp(12px, 2.5vw, 20px);
+          background: linear-gradient(165deg, #0d1a12 0%, #07120c 100%);
+          color: white;
           width: 100%;
-          max-width: min(560px, 94vw);
-          max-height: min(88vh, 680px);
-          overflow-y: auto;
-          box-shadow:
-            0 0 0 1px rgba(180,145,60,0.1),
-            0 24px 80px rgba(0,0,0,0.7),
-            inset 0 1px 0 rgba(255,255,255,0.05);
-          opacity: ${visible ? 1 : 0};
-          transform: ${visible ? "translateY(0) scale(1)" : "translateY(20px) scale(0.97)"};
-          transition: opacity 0.4s ease, transform 0.4s ease;
-          scrollbar-width: thin;
-          scrollbar-color: rgba(180,145,60,0.3) transparent;
+          position: relative;
+          overflow: hidden;
         }
 
-        .prayer-modal-card::-webkit-scrollbar {
-          width: 4px;
-        }
-        .prayer-modal-card::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .prayer-modal-card::-webkit-scrollbar-thumb {
-          background: rgba(180,145,60,0.3);
-          border-radius: 2px;
+        .prayer-modal-card::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle at center, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
+          pointer-events: none;
         }
 
         .prayer-modal-header {
-          padding: clamp(20px, 4vw, 32px) clamp(20px, 4vw, 32px) clamp(12px, 2.5vw, 20px);
+          padding: 40px 32px 24px;
           text-align: center;
-          border-bottom: 1px solid rgba(180,145,60,0.2);
           position: relative;
+          background: rgba(0, 0, 0, 0.2);
         }
 
         .prayer-modal-icon {
-          font-size: clamp(28px, 6vw, 42px);
+          font-size: 48px;
           line-height: 1;
-          margin-bottom: 10px;
+          margin-bottom: 16px;
           display: block;
-          filter: drop-shadow(0 0 12px rgba(210, 175, 80, 0.5));
+          color: #fbbf24;
+          filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.4));
         }
 
         .prayer-modal-title-ar {
           font-family: 'Amiri', serif;
-          font-size: clamp(20px, 4.5vw, 28px);
-          color: #d4aa40;
+          font-size: 32px;
+          color: #fcd34d;
           direction: rtl;
-          margin: 0 0 4px;
+          margin-bottom: 4px;
           font-weight: 700;
-          letter-spacing: 0.02em;
         }
 
         .prayer-modal-title-en {
           font-family: 'Lato', sans-serif;
-          font-size: clamp(11px, 2vw, 13px);
-          color: rgba(212, 170, 64, 0.6);
-          font-weight: 300;
-          letter-spacing: 0.15em;
+          font-size: 13px;
+          color: rgba(252, 211, 77, 0.5);
+          font-weight: 400;
+          letter-spacing: 3px;
           text-transform: uppercase;
           margin: 0;
         }
 
         .prayer-modal-body {
-          padding: clamp(16px, 3.5vw, 28px) clamp(20px, 4vw, 32px);
+          padding: 32px;
           display: flex;
           flex-direction: column;
-          gap: clamp(12px, 2.5vw, 18px);
+          gap: 20px;
         }
 
         .prayer-modal-lead {
           font-family: 'Amiri', serif;
-          font-size: clamp(14px, 3vw, 17px);
-          color: rgba(255,255,255,0.75);
+          font-size: 18px;
+          color: rgba(255, 255, 255, 0.8);
           text-align: center;
-          margin: 0 0 4px;
+          margin-bottom: 4px;
           font-style: italic;
         }
 
         .prayer-item {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(180,145,60,0.15);
-          border-left: 3px solid rgba(180,145,60,0.5);
-          border-radius: 8px;
-          padding: clamp(12px, 2.5vw, 18px) clamp(14px, 3vw, 22px);
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(16, 185, 129, 0.1);
+          border-left: 4px solid #10b981;
+          border-radius: 12px;
+          padding: 20px;
+          transition: all 0.3s ease;
+        }
+
+        .prayer-item:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(16, 185, 129, 0.3);
+          transform: translateX(4px);
         }
 
         .prayer-item-ar {
           font-family: 'Amiri', serif;
-          font-size: clamp(14px, 3vw, 17px);
-          color: rgba(255,255,255,0.9);
+          font-size: 18px;
+          color: rgba(255, 255, 255, 0.95);
           direction: rtl;
-          line-height: 1.7;
-          margin: 0;
+          line-height: 1.8;
+          margin-bottom: 8px;
         }
 
         .prayer-item-en {
           font-family: 'Lato', sans-serif;
-          font-size: clamp(11px, 2.2vw, 13px);
-          color: rgba(180,145,60,0.7);
-          font-weight: 300;
-          line-height: 1.5;
-          margin: 0;
+          font-size: 14px;
+          color: rgba(16, 185, 129, 0.8);
+          font-weight: 400;
+          line-height: 1.6;
+        }
+
+        .divider-ornament {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          margin: 12px 0;
+        }
+
+        .divider-line {
+          height: 1px;
+          flex: 1;
+          background: linear-gradient(90deg, transparent, rgba(252, 211, 77, 0.3), transparent);
+        }
+
+        .divider-symbol {
+          color: #fcd34d;
+          font-size: 18px;
+          opacity: 0.6;
         }
 
         .prayer-modal-footer-text {
           font-family: 'Amiri', serif;
-          font-size: clamp(13px, 2.8vw, 16px);
-          color: rgba(212, 170, 64, 0.85);
+          font-size: 18px;
+          color: #fcd34d;
           text-align: center;
           direction: rtl;
-          margin: 0;
           font-style: italic;
         }
 
         .prayer-modal-footer-text-en {
           font-family: 'Lato', sans-serif;
-          font-size: clamp(10px, 2vw, 12px);
-          color: rgba(212,170,64,0.45);
+          font-size: 12px;
+          color: rgba(252, 211, 77, 0.4);
           text-align: center;
-          margin: 0;
-          font-weight: 300;
+          margin-top: 4px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
         }
 
         .prayer-modal-actions {
-          padding: clamp(12px, 2.5vw, 20px) clamp(20px, 4vw, 32px) clamp(20px, 4vw, 28px);
-          border-top: 1px solid rgba(180,145,60,0.15);
+          padding: 24px 32px 40px;
+          display: flex;
+          justify-content: center;
         }
 
         .prayer-close-btn {
-          width: 100%;
-          padding: clamp(10px, 2.5vw, 14px) 24px;
-          background: linear-gradient(135deg, rgba(180,145,60,0.2) 0%, rgba(180,145,60,0.1) 100%);
-          border: 1px solid rgba(180,145,60,0.4);
-          border-radius: 8px;
-          color: #d4aa40;
+          position: relative;
+          padding: 14px 48px;
+          background: #10b981;
+          border: none;
+          border-radius: 12px;
+          color: #064e3b;
           font-family: 'Lato', sans-serif;
-          font-size: clamp(12px, 2.2vw, 14px);
+          font-size: 14px;
           font-weight: 700;
-          letter-spacing: 0.12em;
+          letter-spacing: 1px;
           text-transform: uppercase;
           cursor: pointer;
-          transition: all 0.25s ease;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .prayer-close-btn::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(180,145,60,0.15), transparent);
-          opacity: 0;
-          transition: opacity 0.25s ease;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
         }
 
         .prayer-close-btn:hover {
-          background: linear-gradient(135deg, rgba(180,145,60,0.3) 0%, rgba(180,145,60,0.15) 100%);
-          border-color: rgba(180,145,60,0.7);
-          box-shadow: 0 4px 20px rgba(180,145,60,0.2);
-          transform: translateY(-1px);
-        }
-
-        .prayer-close-btn:hover::before {
-          opacity: 1;
+          background: #34d399;
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
         }
 
         .prayer-close-btn:active {
           transform: translateY(0);
         }
 
-        .divider-ornament {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          opacity: 0.4;
-        }
-
-        .divider-ornament::before,
-        .divider-ornament::after {
-          content: '';
-          flex: 1;
-          height: 1px;
-          background: linear-gradient(90deg, transparent, rgba(180,145,60,0.6), transparent);
-        }
-
-        .divider-ornament span {
-          color: rgba(180,145,60,0.8);
-          font-size: 12px;
-        }
-
-        /* Laptop-specific: ensure no overflow and comfortable spacing */
-        @media (min-height: 600px) and (max-height: 800px) {
-          .prayer-modal-card {
-            max-height: 82vh;
-          }
-        }
-
-        @media (min-height: 800px) {
-          .prayer-modal-card {
-            max-height: 75vh;
-          }
-        }
-
-        /* Small mobile */
-        @media (max-width: 360px) {
-          .prayer-item {
-            border-left-width: 2px;
-          }
-        }
-
-        /* Landscape mobile */
-        @media (max-height: 500px) and (orientation: landscape) {
-          .prayer-modal-card {
-            max-height: 90vh;
-          }
-          .prayer-modal-header {
-            padding-top: 12px;
-            padding-bottom: 8px;
-          }
-          .prayer-modal-icon {
-            font-size: 22px;
-            margin-bottom: 4px;
-          }
+        @media (max-width: 640px) {
+          .prayer-modal-body { padding: 24px; }
+          .prayer-modal-header { padding: 32px 24px 20px; }
+          .prayer-modal-title-ar { font-size: 26px; }
+          .prayer-item { padding: 16px; }
         }
       `}</style>
 
       <div className="prayer-modal-card">
+        {/* Decorative pattern */}
+        <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+          <svg width="120" height="120" viewBox="0 0 100 100" fill="currentColor">
+            <path d="M50 0 L60 40 L100 50 L60 60 L50 100 L40 60 L0 50 L40 40 Z" />
+          </svg>
+        </div>
+
         {/* Header */}
         <div className="prayer-modal-header">
-          <span className="prayer-modal-icon">☽</span>
-          <p className="prayer-modal-title-ar">تذكير هام</p>
-          <p className="prayer-modal-title-en">Important Reminder</p>
+          <motion.span
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="prayer-modal-icon"
+          >
+            🌙
+          </motion.span>
+          <motion.p
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+            className="prayer-modal-title-ar"
+          >
+            تذكير هام
+          </motion.p>
+          <motion.p
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="prayer-modal-title-en"
+          >
+            Important Reminder
+          </motion.p>
         </div>
 
         {/* Body */}
         <div className="prayer-modal-body">
-          <p className="prayer-modal-lead">Don't forget to pray for:</p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="prayer-modal-lead"
+          >
+            Don't forget to pray for:
+          </motion.p>
 
-          <div className="prayer-item">
+          <motion.div
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            className="prayer-item"
+          >
             <p className="prayer-item-ar">
-              اذا واجدت اي مشاكل في الذكر او الايات تاكد من ان لغه الموقع هي الانجليزيه وليس مترجم
+              اذا وجدت أي مشاكل في الأذكار أو الآيات تأكد من أن لغة الموقع هي الإنجليزية وليس مترجم
             </p>
             <p className="prayer-item-en">
-              If you find any issues with the Azkar or verses, make sure the website language is English and not translated.
+              Ensure site language is English if Azkar/verses appear incorrectly.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="prayer-item">
+          <motion.div
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.7 }}
+            className="prayer-item"
+          >
             <p className="prayer-item-ar">
-              لا تنس ان تذكر صاحب الموقع واخوانك في غزه بالدعاء ولكم بالمثل
+              لا تنسَ ذكر صاحب الموقع وإخوانك في غزة بالدعاء ولكم بالمثل
             </p>
             <p className="prayer-item-en">
-              Don't forget to pray for the website owner and our brothers in Gaza, and may Allah reward you the same.
+              Remember the site owner and our brothers in Gaza in your prayers.
             </p>
-          </div>
+          </motion.div>
 
           <div className="divider-ornament">
-            <span>✦</span>
+            <div className="divider-line"></div>
+            <span className="divider-symbol">✦</span>
+            <div className="divider-line"></div>
           </div>
 
-          <p className="prayer-modal-footer-text">
-            تقبل الله منا ومنكم صالح الاعمال
-          </p>
-          <p className="prayer-modal-footer-text-en">
-            May Allah accept our good deeds and yours
-          </p>
+          <motion.div
+            initial={{ y: 10, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.8 }}
+          >
+            <p className="prayer-modal-footer-text">
+              تقبل الله منا ومنكم صالح الأعمال
+            </p>
+            <p className="prayer-modal-footer-text-en">
+              May Allah accept our good deeds and yours
+            </p>
+          </motion.div>
         </div>
 
         {/* Actions */}
         <div className="prayer-modal-actions">
-          <button className="prayer-close-btn" onClick={onClose}>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="prayer-close-btn"
+            onClick={onClose}
+          >
             Close
-          </button>
+          </motion.button>
         </div>
       </div>
     </Modal>
   );
 };
 
-export default PrayerReminderModal;`2
+export default PrayerReminderModal;
+

@@ -6,6 +6,8 @@ import Surah from "./pages/Quraan/Surah";
 import PrayerTimes from "./pages/PrayerTimes";
 import FindMosque from "./pages/FindMosque";
 import Azkar from "./pages/Azkar";
+import Qibla from "./pages/Qibla";
+import Khatmah from "./pages/Khatmah";
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -15,10 +17,12 @@ function App() {
       <Route path="/surahs" element={<Surahs />} />
       <Route path="/surah/:id" element={<Surah />} />
       <Route path="/prayer-times" element={<PrayerTimes />} />
+      <Route path="/qibla" element={<Qibla />} />
+      <Route path="/khatmah" element={<Khatmah />} />
       <Route path="/find-mosque" element={<FindMosque />} />
       <Route path="/azkar" element={<Azkar />} />
       <Route path="/azkar/:category" element={<Azkar />} />
-      <Route path="*" element={<NotFound/>}/>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

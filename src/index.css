@@ -1,22 +1,43 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@custom-variant dark (&:where(.dark, .dark *));
 
-/* Add smooth transition for dark mode */
-/* * {
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-} */
+@layer base {
+  :root {
+    --primary-emerald: 16, 185, 129;
+    color-scheme: light dark;
+  }
 
-/* Ensure dark mode is applied to the entire document */
-/* :root {
-  color-scheme: light dark;
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply transition-colors duration-500 bg-[#fcfdfb] dark:bg-[#060d0a] text-slate-900 dark:text-white/90;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
 }
 
-.dark {
-  color-scheme: dark;
-} */
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 
-.active{
-  color: rgb(101, 237, 101);
+  .glass {
+    @apply bg-white/80 dark:bg-black/20 backdrop-blur-xl border border-white/20 dark:border-white/5;
+  }
+}
+
+.font-arabic {
+  font-family: 'Amiri', serif;
+}
+
+.active {
+  color: rgb(16, 185, 129);
 }
