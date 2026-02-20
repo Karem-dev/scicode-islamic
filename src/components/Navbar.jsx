@@ -27,7 +27,6 @@ function Navbar() {
     { name: "Home", path: "/" },
     { name: "Quran", path: "/surahs" },
     { name: "Prayer Times", path: "/prayer-times" },
-    { name: "Qibla", path: "/qibla" },
     { name: "Khatmah", path: "/khatmah" },
     { name: "Mosques", path: "/find-mosque" },
     { name: "Azkar", path: "/azkar" },

@@ -7,7 +7,6 @@ import {
   FaStar,
   FaHeart,
   FaMosque,
-  FaCompass,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -31,14 +30,7 @@ function Home() {
       color: "from-amber-400 to-orange-500",
       delay: 0.3
     },
-    {
-      icon: <FaCompass />,
-      title: "Qibla Finder",
-      description: "Locate the precise direction of the Kaaba from anywhere in the world.",
-      link: "/qibla",
-      color: "from-blue-400 to-indigo-500",
-      delay: 0.4
-    },
+
     {
       icon: <FaBook />,
       title: "Daily Azkar",
@@ -80,7 +72,6 @@ function Home() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-100 dark:border-emerald-800/50 text-emerald-700 dark:text-emerald-400 text-sm font-medium mb-8"
             >
-              <FaStar className="mr-2 text-xs" />
               Comprehensive Islamic Portal
             </motion.div>
 
