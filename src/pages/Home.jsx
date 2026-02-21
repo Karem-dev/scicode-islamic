@@ -11,12 +11,14 @@ import {
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { useLanguage } from "../context/LanguageContext";
 
 function Home() {
+  const { t } = useLanguage();
   const features = [
     {
       icon: <FaQuran />,
-      title: "Holy Quran",
+      title: t.quran,
       description: "Experience the divine word with translations and immersive audio recitations in a beautiful interface.",
       link: "/surahs",
       color: "from-emerald-400 to-teal-500",
@@ -24,7 +26,7 @@ function Home() {
     },
     {
       icon: <FaClock />,
-      title: "Prayer Times",
+      title: t.prayers,
       description: "Stay connected with accurate prayer schedules and localized notifications for your daily spiritual routine.",
       link: "/prayer-times",
       color: "from-amber-400 to-orange-500",
@@ -32,7 +34,7 @@ function Home() {
     },
     {
       icon: <FaBook />,
-      title: "Daily Azkar",
+      title: t.azkar,
       description: "Nourish your soul with verified morning, evening, and situational supplications from the Sunnah.",
       link: "/azkar",
       color: "from-rose-400 to-pink-500",
@@ -92,7 +94,7 @@ function Home() {
               className="inline-flex items-center px-5 py-2.5 rounded-full bg-white/50 dark:bg-white/5 backdrop-blur-md border border-slate-200 dark:border-white/10 text-emerald-700 dark:text-emerald-400 text-[13px] font-black tracking-widest uppercase mb-12 shadow-xl shadow-emerald-500/5 shadow-white/10"
             >
               <FaStar className="mr-3 text-xs animate-pulse" />
-              The Premium Islamic Digital Portal
+              {t.appName} {t.faithTech}
             </motion.div>
 
             <motion.h1
@@ -101,9 +103,9 @@ function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-6xl md:text-8xl font-black mb-10 text-slate-900 dark:text-white leading-[0.95] tracking-tight"
             >
-              Elevate Your <br />
+              {t.heroTitle} <br />
               <span className="text-gradient">
-                Spiritual Essence
+                {t.heroSubtitle}
               </span>
             </motion.h1>
 
@@ -113,7 +115,7 @@ function Home() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-16 max-w-2xl mx-auto leading-relaxed font-medium opacity-80"
             >
-              Immerse yourself in a refined digital sanctuary for the Holy Quran, accurate prayer schedules, and divine wisdom.
+              {t.heroDesc}
             </motion.p>
 
             <motion.div
@@ -124,7 +126,7 @@ function Home() {
             >
               <Link to="/surahs" className="btn-premium group w-full sm:w-auto">
                 <span className="relative z-10 flex items-center justify-center">
-                  Begin Quran Journey
+                  {t.beginJourney}
                   <FaArrowRight className="ml-3 group-hover:translate-x-2 transition-transform duration-300" />
                 </span>
               </Link>
@@ -132,7 +134,7 @@ function Home() {
                 to="/azkar"
                 className="w-full sm:w-auto px-10 py-5 rounded-3xl bg-white dark:bg-white/5 border-2 border-slate-100 dark:border-white/10 text-slate-900 dark:text-white font-black hover:border-emerald-500/50 hover:bg-emerald-50/50 dark:hover:bg-white/10 transition-all flex items-center justify-center group shadow-xl shadow-black/5 active:scale-95"
               >
-                Explore Sanctuary
+                {t.exploreSanctuary}
                 <FaBook className="ml-3 group-hover:rotate-12 transition-transform duration-300" />
               </Link>
             </motion.div>
@@ -150,7 +152,7 @@ function Home() {
             className="mb-24 text-center"
           >
             <h2 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white mb-6">
-              Divine Features
+              {t.featuresTitle}
             </h2>
             <div className="h-2 w-32 bg-gradient-to-r from-emerald-600 to-teal-400 mx-auto rounded-full shadow-lg shadow-emerald-500/20" />
           </motion.div>
@@ -213,11 +215,10 @@ function Home() {
               <FaHeart className="text-emerald-400 text-6xl mb-12 mx-auto filter drop-shadow(0 0 20px rgba(52,211,153,0.4))" />
             </motion.div>
             <h2 className="text-5xl md:text-7xl font-black text-white mb-10 leading-[1.1] tracking-tighter">
-              A Spiritual Journey <br className="hidden md:block" />
-              Awaits Your Presence
+              {t.ctaTitle}
             </h2>
             <p className="text-emerald-100/60 text-xl mb-16 max-w-xl mx-auto font-medium">
-              Join thousands who use our digital sanctuary to keep their heart connected to the divine.
+              {t.ctaDesc}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-8">
               <Link
@@ -247,8 +248,8 @@ function Home() {
                   <FaQuran className="text-2xl" />
                 </div>
                 <div>
-                  <span className="block text-2xl font-black text-slate-900 dark:text-white tracking-tighter">SCICODE</span>
-                  <span className="text-xs text-emerald-600 dark:text-emerald-400 font-bold tracking-[0.2em] uppercase">Faith & Technology</span>
+                  <span className="block text-2xl font-black text-slate-900 dark:text-white tracking-tighter">{t.appName}</span>
+                  <span className="text-xs text-emerald-600 dark:text-emerald-400 font-bold tracking-[0.2em] uppercase">{t.faithTech}</span>
                 </div>
               </div>
               <p className="text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed max-w-xs text-center md:text-left">
@@ -257,15 +258,15 @@ function Home() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-8 text-[13px] font-black uppercase tracking-widest text-slate-400 dark:text-slate-500">
-              <Link to="/surahs" className="hover:text-emerald-600 transition-colors">Quran</Link>
-              <Link to="/prayer-times" className="hover:text-emerald-600 transition-colors">Prayers</Link>
-              <Link to="/azkar" className="hover:text-emerald-600 transition-colors">Azkar</Link>
-              <Link to="/find-mosque" className="hover:text-emerald-600 transition-colors">Mosques</Link>
+              <Link to="/surahs" className="hover:text-emerald-600 transition-colors">{t.quran}</Link>
+              <Link to="/prayer-times" className="hover:text-emerald-600 transition-colors">{t.prayers}</Link>
+              <Link to="/azkar" className="hover:text-emerald-600 transition-colors">{t.azkar}</Link>
+              <Link to="/find-mosque" className="hover:text-emerald-600 transition-colors">{t.mosques}</Link>
             </div>
 
-            <div className="flex flex-col items-center md:items-end space-y-2">
+            <div className="flex flex-col items-center md:items-end gap-2">
               <div className="text-sm text-slate-400 dark:text-slate-600 font-bold">
-                &copy; {new Date().getFullYear()} Crafted by{" "}
+                &copy; {new Date().getFullYear()} {t.craftedBy}{" "}
                 <a
                   href="https://karem-mahmoud.vercel.app/"
                   target="_blank"
@@ -275,9 +276,14 @@ function Home() {
                   Karem Mahmoud
                 </a>
               </div>
-              <div className="text-[10px] text-slate-300 dark:text-white/10 font-bold tracking-[0.3em] uppercase">
-                Sci-Code Academy Experience
-              </div>
+              <a
+                href="http://scicodeacademy.infinityfreeapp.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[10px] text-slate-400 dark:text-white/20 font-bold tracking-[0.3em] uppercase hover:text-emerald-500 transition-colors"
+              >
+                {t.academy}
+              </a>
             </div>
           </div>
         </div>

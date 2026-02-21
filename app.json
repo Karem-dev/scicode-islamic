@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "c41a1bc8-a34d-4f94-bcaf-b9fb709e0311"
+      }
+    },
+    "android": {
+      "package": "com.karem_dev.quranportal"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "Scicode Islamic",
+    "slug": "scicode-islamic-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.scicode.islamic",
+      "permissions": [
+        "android.permission.WRITE_SETTINGS"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-brightness",
+        {
+          "locationAlwaysAndWhenInUsePermission": false
+        }
+      ]
+    ],
+    "web": {
+      "favicon": "./assets/logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "738e0081-e049-44c9-9bca-e55c11c89711"
+      }
+    }
+  }
+}
