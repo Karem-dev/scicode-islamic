@@ -14,6 +14,7 @@ export const ar = {
     azkar: "الأذكار",
     mosques: "المساجد",
     khatmah: "الختمة",
+    app: "التطبيق",
 
     // Home
     heroTitle: "ارتقِ",
@@ -50,5 +51,22 @@ export const ar = {
 
     // Footer
     craftedBy: "صُنع بواسطة",
-    academy: "تجربة أكاديمية ساي كود"
+    academy: "تجربة أكاديمية ساي كود",
+
+    // Download
+    downloadApp: "تحميل التطبيق للجوال",
+    getAppTitle: "رفيقك الروحي،",
+    getAppSubtitle: "في كل مكان وزمان",
+    getAppDesc: "احمل هدوء وملاذنا الرقمي على جهازك المحمول. استمتع بتجربة سلسة لقراءة القرآن، ومواقيت الصلاة، والمزيد.",
+    installNow: "تثبيت الآن",
+    directDownload: "تحميل مباشر APK",
+    scanQR: "امسح الكود للتحميل",
+    availableOn: "متاح لأجهزة أندرويد وآيفون",
+    appFeaturesTitle: "تجربة مخصصة للجوال",
+    offlineAccess: "وصول بدون إنترنت",
+    offlineAccessDesc: "اقرأ القرآن والأذكار حتى بدون اتصال بالإنترنت.",
+    accurateNotifications: "أذان دقيق",
+    accurateNotificationsDesc: "لا تفوت صلاة أبداً مع تنبيهات الأذان حسب موقعك.",
+    customBookmarks: "علامات ذكية",
+    customBookmarksDesc: "تقدم قراءتك يتزامن بشكل مثالي عبر جميع أجهزتك."
 };

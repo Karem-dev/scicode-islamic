@@ -8,12 +8,14 @@ import FindMosque from "./pages/FindMosque";
 import Azkar from "./pages/Azkar";
 
 import Khatmah from "./pages/Khatmah";
+import DownloadApp from "./pages/DownloadApp";
 import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/download" element={<DownloadApp />} />
       <Route path="/surahs" element={<Surahs />} />
       <Route path="/surah/:id" element={<Surah />} />
       <Route path="/prayer-times" element={<PrayerTimes />} />

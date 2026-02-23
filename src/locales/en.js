@@ -14,6 +14,7 @@ export const en = {
     azkar: "Azkar",
     mosques: "Mosques",
     khatmah: "Khatmah",
+    app: "App",
 
     // Home
     heroTitle: "Elevate Your",
@@ -50,5 +51,22 @@ export const en = {
 
     // Footer
     craftedBy: "Crafted by",
-    academy: "Sci-Code Academy Experience"
+    academy: "Sci-Code Academy Experience",
+
+    // Download
+    downloadApp: "Download Mobile App",
+    getAppTitle: "Your Spiritual Companion,",
+    getAppSubtitle: "Anywhere, Anytime.",
+    getAppDesc: "Bring the serenity of our digital sanctuary to your mobile device. Experience seamless Quran reading, prayer times, and more on the go.",
+    installNow: "Install Now",
+    directDownload: "Direct APK Download",
+    scanQR: "Scan to Download",
+    availableOn: "Available for Android & iOS",
+    appFeaturesTitle: "Mobile-First Experience",
+    offlineAccess: "Offline Access",
+    offlineAccessDesc: "Read the Quran and Azkar even without an internet connection.",
+    accurateNotifications: "Accurate Athan",
+    accurateNotificationsDesc: "Never miss a prayer with localized athan notifications.",
+    customBookmarks: "Smart Bookmarks",
+    customBookmarksDesc: "Your reading progress syncs perfectly across all your devices."
 };

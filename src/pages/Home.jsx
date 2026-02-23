@@ -222,6 +222,12 @@ function Home() {
             </p>
             <div className="flex flex-wrap items-center justify-center gap-8">
               <Link
+                to="/download"
+                className="px-12 py-6 rounded-3xl bg-emerald-500 text-white font-black hover:bg-emerald-400 transition-all shadow-2xl active:scale-95 flex items-center shadow-emerald-500/20"
+              >
+                Download App
+              </Link>
+              <Link
                 to="/prayer-times"
                 className="px-12 py-6 rounded-3xl bg-white text-emerald-900 font-black hover:bg-emerald-50 transition-all shadow-2xl active:scale-95 flex items-center"
               >

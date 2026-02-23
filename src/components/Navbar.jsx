@@ -32,6 +32,7 @@ function Navbar() {
     { name: t.khatmah, path: "/khatmah" },
     { name: t.mosques, path: "/find-mosque" },
     { name: t.azkar, path: "/azkar" },
+    { name: t.app, path: "/download" },
   ];
 
   return (
