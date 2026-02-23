@@ -4,7 +4,6 @@ import {
     FaDownload,
     FaAndroid,
     FaApple,
-    FaQrcode,
     FaShieldAlt,
     FaWifi,
     FaBell,
@@ -19,8 +18,7 @@ import appMockup from "../assets/app-mockup.png";
 
 function DownloadApp() {
     const { t, isRTL } = useLanguage();
-    const downloadUrl = "https://expo.dev/accounts/karem_dev/projects/scicode-islamic-mobile/builds/e3fe670f-e85a-400e-8b7f-1769a1e3eae5";
-    const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(downloadUrl)}`;
+    const downloadUrl = "https://expo.dev/artifacts/eas/u9URigWd8dBpNLFQJF8BY2.apk";
 
     const features = [
         {
@@ -136,22 +134,6 @@ function DownloadApp() {
                         </motion.div>
 
                         <hr className="border-slate-200 dark:border-white/5 w-full max-w-md" />
-
-                        {/* QR Code Section */}
-                        <motion.div variants={itemVariants} className="flex items-center gap-8 p-6 rounded-3xl bg-white/50 dark:bg-white/5 backdrop-blur-xl border border-white dark:border-white/10 shadow-xl max-w-md">
-                            <div className="p-2 bg-white rounded-2xl shadow-inner">
-                                <img src={qrCodeUrl} alt="QR Code" className="w-24 h-24" />
-                            </div>
-                            <div>
-                                <h4 className="font-black text-slate-900 dark:text-white mb-1 flex items-center gap-2">
-                                    <FaQrcode className="text-emerald-500" />
-                                    {t.scanQR}
-                                </h4>
-                                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                                    Scan to download directly on your phone wirelessly.
-                                </p>
-                            </div>
-                        </motion.div>
                     </motion.div>
 
                     {/* Right Column: Mockup */}

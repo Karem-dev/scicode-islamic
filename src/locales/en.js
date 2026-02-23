@@ -60,7 +60,6 @@ export const en = {
     getAppDesc: "Bring the serenity of our digital sanctuary to your mobile device. Experience seamless Quran reading, prayer times, and more on the go.",
     installNow: "Install Now",
     directDownload: "Direct APK Download",
-    scanQR: "Scan to Download",
     availableOn: "Available for Android & iOS",
     appFeaturesTitle: "Mobile-First Experience",
     offlineAccess: "Offline Access",

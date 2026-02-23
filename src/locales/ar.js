@@ -60,7 +60,6 @@ export const ar = {
     getAppDesc: "احمل هدوء وملاذنا الرقمي على جهازك المحمول. استمتع بتجربة سلسة لقراءة القرآن، ومواقيت الصلاة، والمزيد.",
     installNow: "تثبيت الآن",
     directDownload: "تحميل مباشر APK",
-    scanQR: "امسح الكود للتحميل",
     availableOn: "متاح لأجهزة أندرويد وآيفون",
     appFeaturesTitle: "تجربة مخصصة للجوال",
     offlineAccess: "وصول بدون إنترنت",
