@@ -152,7 +152,7 @@ function DownloadApp() {
                             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                             src={appMockup}
                             alt="App Mockup"
-                            className="w-full h-auto drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] dark:drop-shadow-[0_35px_35px_rgba(16,185,129,0.1)]"
+                            className="w-full rounded-md h-auto drop-shadow-[0_35px_35px_rgba(0,0,0,0.25)] dark:drop-shadow-[0_35px_35px_rgba(16,185,129,0.1)]"
                         />
 
                         {/* Floating Badges */}
